@@ -1,0 +1,36 @@
+/* C++ Program To Remove Leading Zeros
+   Author: Sheharyar Khan Daym
+   Date: November 6, 2023
+   Bio: Student at Punjab University College of Information Technology (PUCIT)
+   Location: Near Old Anarkali, Lahore, Punjab, Pakistan
+   Contact: sheharyar.daym@gmail.com
+
+   This program removes the leading zeros in an array
+*/
+
+
+#include<iostream>        // header file to link cout and cin
+#include<string.h>        // header file used for strings
+using namespace std;
+
+int main(){
+    char number[100];    // initialize array with 101 length
+    int count=0;         // count will give the index of number[]
+
+    cout <<"Enter number here: ";
+    cin >> number;
+
+    for(int i=0; number[i]!='\0'; i++)    
+    {     
+        if(number[i]>'0'){               // if number[] is greater than 0 it will break the loop and give the index using count
+            break;            
+        }        
+        count = count + 1;               // it will increment 1 number after every iteration
+    }
+  // After this iteration we will find the index of 1st non-zero element in an array
+    
+    for (int j=count; number[j]!='\0'; j++){      // it will start from the index of non-zero leading element
+        cout<<number[j];                          // starting to print
+    }
+    return 0;
+}
