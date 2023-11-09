@@ -1,0 +1,36 @@
+/* Write a program to reverse an array.
+   Author: Sheharyar Khan Daym
+   Date: November 9, 2023
+   Bio: Student at Punjab University College of Information Technology (PUCIT)
+   Location: Near Old Anarkali, Lahore, Punjab, Pakistan
+   Contact: sheharyar.daym@gmail.com
+
+*/
+
+#include<iostream>    // header file
+#include<string.h>    // header file for string
+using namespace std;
+
+
+
+void reverse(char arr[]){     // function body
+    int count=0;
+    int i,j;
+
+    for( i=0; arr[i]!='\0'; i++){    
+        
+        count += 1;              // it will count the total number of index
+    }
+  
+    for( j=count; j>=0; j--){      // the loop begins from the last index and starts printing from the last so, the array will be reverse
+        cout<<arr[j];
+    }
+
+}   // end of function
+
+int main(){       // start main
+    char name[]="WelcomeToC++";
+    reverse(name);    // function call
+
+    return 0;
+}  // end
