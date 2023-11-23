@@ -1,4 +1,5 @@
-# String-in-C++
+# C programs
 Author: Sheharyar Khan Daym
 <br>
-Examples of String in C++ 
+Contact: sheharyar.daym@gmail.com
+ 
