@@ -1,7 +1,8 @@
 /* C Program to make REF(Gaussian eliminaiton)
    We can make it nxn by just changing MACROS..
+
    Author: Sheharyar Khan Daym
-   Date: November 11, 2023
+   Date: November 24, 2023
    Location: Punjab University College of Information Technology (PUCIT), Near Old Anarkali, Lahore, Punjab, Pakistan
    Contact: sheharyar.daym@gmail.com
 
@@ -62,6 +63,12 @@ void making_REF(float matrix[ROW][COL]){
                 matrix[i][j] -= factor * matrix[row][j] / pivot;
             }
         }
+        
+        // making pivot 1
+        for(int i=col; i<COL; i++){
+            matrix[row][i] /= pivot;
+        }
+        
         
         row++;
     }
