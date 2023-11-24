@@ -1,4 +1,6 @@
 /* C Program to find the determinant of 3x3 matrix
+    We can make it nxn by just changing the MACROS
+
    Author: Sheharyar Khan Daym
    Date: November 11, 2023
    Location: Punjab University College of Information Technology (PUCIT), Near Old Anarkali, Lahore, Punjab, Pakistan
@@ -14,28 +16,28 @@
 #define COL 3
 
 // Functions
-void printMatrix(int matrix[ROW][COL]){
+void printMatrix(float matrix[ROW][COL]){
     for(int i=0; i<ROW; i++){
         for(int j = 0; j<COL; j++){
-            printf("%d  ", matrix[i][j]);
+            printf("%.1f\t", matrix[i][j]);
         }
         puts("");
     }
 }
 
-void making_REF(int matrix[ROW][COL]){
+void making_REF(float matrix[ROW][COL]){
     int row = 0;
     // Column wise pivot search
     for(int col = 0; col < COL; col++){
         int pivotRow = row;
 
         // Finding pivot row
-        while(pivotRow<ROW && matrix[pivotRow][col]==0){
+        while(pivotRow<ROW && matrix[pivotRow][col]==0){ // if all time it runs, means there in no pivot in the column
             pivotRow++;
         }
 
         // If no pivot in the column, then continue
-        if(pivotRow == ROW){
+        if(pivotRow == ROW){        // ROW -->3, it means if pivotRow == 3
             continue;
         }
 
@@ -46,33 +48,49 @@ void making_REF(int matrix[ROW][COL]){
                 matrix[pivotRow][i] = matrix[row][i];
                 matrix[row][i] = temp;
             }
+       
         }
 
-        int pivot = matrix[row][col];
+        float pivot = matrix[row][col];
 
         // Making zeros below the leading entry of the pivot row
         for(int i=row+1; i<ROW; i++){
-            int factor = matrix[i][col];
+            // row + 1, because will check it from 2nd row
+
+            float factor = matrix[i][col];  // we will make factor to 0
+            // i--> Current row,  col--> Current column
 
             for(int j=0; j<COL; j++){
                 matrix[i][j] -= factor * matrix[row][j] / pivot;
             }
         }
-        
+
         row++;
     }
 }
 
+void determinant(float matrix[][COL]){
+    int det=1;
+    for(int i=0; i<ROW; i++){
+        for(int j=0; j<COL; j++){
+            if(i==j){
+                det = det * matrix[i][j];
+            }
+        }
+    }
+    printf("\nDeterminant: %d", det);
+}
+
 
 // Main Function
-int main() {
-    int matrix[ROW][COL];
+int main(){
+    float matrix[ROW][COL];
 
     // Input matrix elements
     printf("Enter the matrix 3X3: \n");
     for(int i=0; i<ROW; i++){
         for(int j=0; j<COL; j++){       
-            scanf("%d", &matrix[i][j]);
+            scanf("%f", &matrix[i][j]);
         }
     }
 
@@ -85,5 +103,8 @@ int main() {
     printf("Matrix in row echelon form:\n");
     printMatrix(matrix);
 
+    determinant(matrix);
+
     return 0;
 }
+
