@@ -1,0 +1,89 @@
+/* C Program to find the determinant of 3x3 matrix
+   Author: Sheharyar Khan Daym
+   Date: November 11, 2023
+   Location: Punjab University College of Information Technology (PUCIT), Near Old Anarkali, Lahore, Punjab, Pakistan
+   Contact: sheharyar.daym@gmail.com
+
+   Find the determinant of 3x3 matrix
+*/
+
+#include<stdio.h>
+
+// Macros
+#define ROW 3
+#define COL 3
+
+// Functions
+void printMatrix(int matrix[ROW][COL]){
+    for(int i=0; i<ROW; i++){
+        for(int j = 0; j<COL; j++){
+            printf("%d  ", matrix[i][j]);
+        }
+        puts("");
+    }
+}
+
+void making_REF(int matrix[ROW][COL]){
+    int row = 0;
+    // Column wise pivot search
+    for(int col = 0; col < COL; col++){
+        int pivotRow = row;
+
+        // Finding pivot row
+        while(pivotRow<ROW && matrix[pivotRow][col]==0){
+            pivotRow++;
+        }
+
+        // If no pivot in the column, then continue
+        if(pivotRow == ROW){
+            continue;
+        }
+
+        // If the pivot is not in the current row, it swaps the rows to bring the pivot to the current row.
+        if(pivotRow != row){
+            for(int i = 0; i<COL; i++){
+                int temp = matrix[pivotRow][i];
+                matrix[pivotRow][i] = matrix[row][i];
+                matrix[row][i] = temp;
+            }
+        }
+
+        int pivot = matrix[row][col];
+
+        // Making zeros below the leading entry of the pivot row
+        for(int i=row+1; i<ROW; i++){
+            int factor = matrix[i][col];
+
+            for(int j=0; j<COL; j++){
+                matrix[i][j] -= factor * matrix[row][j] / pivot;
+            }
+        }
+        
+        row++;
+    }
+}
+
+
+// Main Function
+int main() {
+    int matrix[ROW][COL];
+
+    // Input matrix elements
+    printf("Enter the matrix 3X3: \n");
+    for(int i=0; i<ROW; i++){
+        for(int j=0; j<COL; j++){       
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+
+    // Output
+    printf("Matrix you entered:\n");
+    printMatrix(matrix);
+
+    making_REF(matrix);
+
+    printf("Matrix in row echelon form:\n");
+    printMatrix(matrix);
+
+    return 0;
+}
