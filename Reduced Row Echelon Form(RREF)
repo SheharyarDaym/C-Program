@@ -16,45 +16,45 @@
 #define COL 3
 
 // Functions
-void printMatrix(float matrix[ROW][COL]){
+void printMatrix(int matrix[ROW][COL]){
     for(int i=0; i<ROW; i++){
         for(int j = 0; j<COL; j++){
-            printf("%.1f\t", matrix[i][j]);
+            printf("%d\t", matrix[i][j]);
         }
         puts("");
     }
 }
 
-void making_RREF(float matrix[ROW][COL]){
+void making_RREF(int matrix[ROW][COL]){
     int row = 0;
     // Column wise pivot search
     for(int col = 0; col < COL; col++){
-        int pivotRow = row;
+        int pivot_Row = row;
 
         // Finding pivot row
-        while(pivotRow<ROW && matrix[pivotRow][col]==0){ // if all time it runs, means there in no pivot in the column
-            pivotRow++;
+        while(pivot_Row<ROW && matrix[pivot_Row][col]==0){ // if all time it runs, means there in no pivot in the column
+            pivot_Row++;
         }
 
         // If no pivot in the column, then continue
-        if(pivotRow == ROW){        // ROW -->3, it means if pivotRow == 3
+        if(pivot_Row == ROW){        // ROW -->3, it means if pivotRow == 3
             continue;
         }
 
         // If the pivot is not in the current row, it swaps the rows to bring the pivot to the current row.
-        if(pivotRow != row){
+        if(pivot_Row != row){
             for(int i = 0; i<COL; i++){
-                int temp = matrix[pivotRow][i];
-                matrix[pivotRow][i] = matrix[row][i];
+                int temp = matrix[pivot_Row][i];
+                matrix[pivot_Row][i] = matrix[row][i];
                 matrix[row][i] = temp;
             }
         }
 
-        int pivot = matrix[row][col];
 
+        int pivot = matrix[row][col];
         // making pivot 1
         for(int i=col; i<COL; i++){
-            matrix[row][i] /= pivot;
+            matrix[row][i] = matrix[row][i]/pivot;
         }
 
         // making rref
@@ -62,28 +62,33 @@ void making_RREF(float matrix[ROW][COL]){
         for(int i=0; i<ROW; i++){
             if(i != row){
                 // i is not equal to the current number of row
-                int factor = matrix[i][col];
-                // factor is the elemet which becomes 0
+                int zero = matrix[i][col];
+                // zero is the elemet which becomes 0
                 for(int j=col; j<COL; j++){
-                    matrix[i][j] -= factor * matrix[row][j];
+                    matrix[i][j] = matrix[i][j] - zero * matrix[row][j];
                 }
             }
         }
         
         row++;
     }
+
+    printf("Matrix in Reduced Row Echelon Form:\n");
+    printMatrix(matrix);
 }
+
+
 
 
 // Main Function
 int main(){
-    float matrix[ROW][COL];
+    int matrix[ROW][COL];
 
     // Input matrix elements
     printf("Enter the matrix 3X3: \n");
     for(int i=0; i<ROW; i++){
         for(int j=0; j<COL; j++){       
-            scanf("%f", &matrix[i][j]);
+            scanf("%d", &matrix[i][j]);
         }
     }
 
@@ -92,9 +97,6 @@ int main(){
     printMatrix(matrix);
 
     making_RREF(matrix);
-
-    printf("Matrix in REduced Row Echelon Form:\n");
-    printMatrix(matrix);
 
     return 0;
 }
