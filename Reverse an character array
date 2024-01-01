@@ -7,43 +7,33 @@
 
 */
 
-#include<iostream>    // header file
-#include<string.h>    // header file for string
-using namespace std;
-
-
-
-
 #include<stdio.h>
+int main(){
+    int n;
+    printf("Enter number of charaters to be entered: ");
+    scanf("%d", &n);
 
-void reverse(char name[]){
-    int count=0;
-    
-    for(int i=0; name[i]!='\0'; i++){
-        count++;
+    char name[n+1];  // n+1 because of NULL character
+    for(int i=0; i<n; i++){
+        scanf(" %c", &name[i]);   // whitespace before %c due to use of \n
     }
 
-    char temp;
-    
-    count--;
-    for(int i=0; i<count; i++){
-        
-            temp = name[i];
-            name[i] = name[count];
-            name[count] = temp;
-            count--;
+    // reversing
+    for(int i=0, j=n-1; name[i]!='\0' && name[j]>=0; i++, j--){
+        if(i==j){
+            break;
         }
-        
-    cout<<name;  
 
+        char temp = name[i];
+        name[i] = name[j];
+        name[j] = temp;
 
-}
+    }
 
-int main(){
-    char name[500];
-    name = cin.get();
+    // Printing
+    for(int i=0; i<n; i++){
+        printf("%c ", name[i]);
+    }
 
-    reverse(name);
     return 0;
 }
-
